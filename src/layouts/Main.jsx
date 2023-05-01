@@ -1,10 +1,16 @@
 import React from 'react';
+import Header from '../pages/Shared/Header/Header';
+import Footer from '../pages/Shared/Footer/Footer';
+import { Outlet } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 const Main = () => {
     return (
-        <div>
-            <h1>This is a main layout</h1>
-        </div>
+        <Container>
+            <Header></Header>
+            <Outlet></Outlet>
+            <Footer></Footer>
+        </Container>
     );
 };
 
