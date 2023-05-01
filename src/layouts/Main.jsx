@@ -6,11 +6,11 @@ import { Container } from 'react-bootstrap';
 
 const Main = () => {
     return (
-        <Container>
+        <div>
             <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
-        </Container>
+        </div>
     );
 };
 
