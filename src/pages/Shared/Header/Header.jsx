@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavBar from '../NavBar/NavBar';
-import { Card, Image } from 'react-bootstrap';
+import { Card, Carousel, Image } from 'react-bootstrap';
 import header from '../../../assets/header.jpg'
+import header2 from '../../../assets/header-bg.jpg'
 import feature1 from '../../../assets/feature-1.jpg'
 import feature2 from '../../../assets/feature-2.jpg'
 
 const Header = () => {
+
     return (
         <div>
             <NavBar></NavBar>
             <Card className="bg-dark text-white mt-2">
-                <Card.Img className='h-25' src={header} alt="Card image" />
+                <Card.Img className='h-25' src={header2} alt="Card image" />
                 <Card.ImgOverlay className='d-flex'>
                     <div className='w-50'>
                         <Card.Title>Perfect Chef Recipe</Card.Title>
@@ -20,11 +22,12 @@ const Header = () => {
                         <Card.Text>Last updated 3 mins ago</Card.Text>
                     </div>
                     <div className='w-50 h-25 rounded bg-black text-center'>
-                    <Image style={{height:'100%'}} src={feature1} rounded />
-                    <Image style={{height:'100%'}} src={feature2} rounded />
-                    <Image style={{height:'100%'}} src={feature1} rounded />
+                        <Image style={{ height: '100%' }} src={feature1} rounded />
+                        <Image style={{ height: '100%' }} src={feature2} rounded />
+                        <Image style={{ height: '100%' }} src={feature1} rounded />
                     </div>
                 </Card.ImgOverlay>
+    
             </Card>
         </div>
     );

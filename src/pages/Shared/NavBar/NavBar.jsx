@@ -1,10 +1,19 @@
 import React, { useContext } from 'react';
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, Image } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 const NavBar = () => {
-    const { user } = useContext(AuthContext);
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => { })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
@@ -12,15 +21,19 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#features">Home</Nav.Link>
-                        <Nav.Link href="#pricing">Blog</Nav.Link>
+                        <Link className='text-decoration-none px-2' to="/">Home</Link>
+                        <Link className='text-decoration-none px-2' to="/blog">Blog</Link>
                     </Nav>
                     <Nav>
                         {
-                            user && <FaUserCircle style={{ fontSize: '2rem' }}></FaUserCircle>
+                            user && <Image style={{height:'40px', borderRadius:'50%', marginRight:'10px'}} src={user?.photoURL}></Image>
+                            
                         }
                         {
-                            user ? <Button variant="secondary">Logout</Button> :
+                            user ?
+                                <Button onClick={handleSignOut} variant="secondary">Logout</Button>
+
+                                :
                                 <Link to='/login'><Button variant="secondary">Login</Button></Link>
 
                         }

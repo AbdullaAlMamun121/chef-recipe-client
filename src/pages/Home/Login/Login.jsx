@@ -1,39 +1,58 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Login = () => {
-    const { createUserByGoogle, createUserByGithub } = useContext(AuthContext);
-
+    const [error, setError] = useState('');
+    const { createUserByGoogle, createUserByGithub, logIn } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+        setError('');
+
+        logIn(email, password)
+            .then(result => {
+                const loggedIn = result.user;
+                form.reset();
+                navigate('/');
+                console.log(loggedIn);
+            })
+            .catch(err => {
+                setError(err.message);
+                console.log(err.message);
+            });
     }
     const handleLoginByGoogle = () => {
         createUserByGoogle()
             .then(result => {
                 const loggedInUser = result.user;
+                navigate('/');
                 console.log(loggedInUser);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
     const handleLoginByGithub = () => {
         createUserByGithub()
             .then(result => {
                 const loggedInUser = result.user;
+                navigate('/');
                 console.log(loggedInUser);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
+
     return (
         <div className='w-25 mx-auto py-5'>
             <h3>Please Login</h3>
@@ -58,11 +77,13 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
-
-
                 <br></br>
                 <Form.Text className="text-muted">
                     New to chef recipe? <Link to="/register">Register</Link>
+                </Form.Text>
+                <br/>
+                <Form.Text className="text-muted">
+                    {error}
                 </Form.Text>
             </Form>
         </div>
