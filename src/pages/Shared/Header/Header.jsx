@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
 import NavBar from '../NavBar/NavBar';
-import { Card, Carousel, Image } from 'react-bootstrap';
+import {  Carousel } from 'react-bootstrap';
 import header from '../../../assets/header.jpg'
 import header2 from '../../../assets/header-bg.jpg'
-import feature1 from '../../../assets/feature-1.jpg'
-import feature2 from '../../../assets/feature-2.jpg'
+
 
 const Header = () => {
 
@@ -40,7 +38,7 @@ const Header = () => {
                         className="d-block h-100 w-100"
                         src={header}
                         alt="Third slide"
-                        
+
                     />
 
                     <Carousel.Caption>
