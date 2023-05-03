@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Login = () => {
     const [error, setError] = useState('');
     const { createUserByGoogle, createUserByGithub, logIn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+
+
+    const from = location.state?.from?.pathname || '/';
+
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -20,7 +25,7 @@ const Login = () => {
             .then(result => {
                 const loggedIn = result.user;
                 form.reset();
-                navigate('/');
+                navigate(from,{replace:true});
                 console.log(loggedIn);
             })
             .catch(err => {
@@ -32,7 +37,7 @@ const Login = () => {
         createUserByGoogle()
             .then(result => {
                 const loggedInUser = result.user;
-                navigate('/');
+                navigate(from,{replace:true});
                 console.log(loggedInUser);
             })
             .catch((err) => {
@@ -44,7 +49,7 @@ const Login = () => {
         createUserByGithub()
             .then(result => {
                 const loggedInUser = result.user;
-                navigate('/');
+                navigate(from,{replace:true});
                 console.log(loggedInUser);
             })
             .catch((err) => {
