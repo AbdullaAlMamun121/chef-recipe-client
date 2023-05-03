@@ -26,7 +26,7 @@ const NavBar = () => {
                     </Nav>
                     <Nav>
                         {
-                            user && <Image style={{height:'40px', borderRadius:'50%', marginRight:'10px'}} src={user?.photoURL}></Image>
+                            user && <Image title={user?.displayName} style={{height:'40px', borderRadius:'50%', marginRight:'10px'}} src={user?.photoURL}></Image>
                             
                         }
                         {

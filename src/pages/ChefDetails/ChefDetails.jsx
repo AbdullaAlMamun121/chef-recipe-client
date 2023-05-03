@@ -19,10 +19,10 @@ const ChefDetails = () => {
                     <Card.Text><span className='fw-bold'>Recipe Description:</span> {descriptions}</Card.Text>
                     <Card.Text> <FaThumbsUp /> {likes}</Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-muted">Footer</Card.Footer>
             </Card>
             <div className='d-flex mt-4'>
                 {recipes.map(recipe => <Card className='p-4 m-2'>
+                    <p><span className='fw-bold'>Recipe No:</span> {recipe.id}</p>
                     <p><span className='fw-bold'>Recipe Name:</span> {recipe.name}</p>
                     <p> <span className='fw-bold'> Ingredients:</span>{recipe.ingredients}</p>
                     <p><span className='fw-bold'> Cooking Method:</span> {recipe.cookingMethod}</p>
