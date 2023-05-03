@@ -1,11 +1,20 @@
-import React from 'react';
-import { Button, Card, Container } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Card, Container, Toast } from 'react-bootstrap';
 import { FaThumbsUp } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 
 const ChefDetails = () => {
     const details = useLoaderData();
     const { name, yearsOfExperience, descriptions, numberOfRecipes, likes, image, recipes } = details;
+   
+    const [disableButton,setDisableButton] = useState(null);
+    const [showToast,setShowToast] = useState(false);
+
+    const handleFavorite = (recipe_id) => {
+        setDisableButton(recipe_id);
+        setShowToast(true);
+    }
+
     return (
         <Container className='mt-5 p-5'>
             <h3 className="text-center">Chef details</h3>
@@ -27,10 +36,19 @@ const ChefDetails = () => {
                     <p> <span className='fw-bold'> Ingredients:</span>{recipe.ingredients}</p>
                     <p><span className='fw-bold'> Cooking Method:</span> {recipe.cookingMethod}</p>
                     <p><span className='fw-bold'> Rating:</span> {recipe.rating}</p>
-                    <Button variant="secondary">Add Favorite</Button>
+                    <Button disabled={disableButton === recipe.id} 
+                    onClick={()=>handleFavorite(recipe.id)} variant="secondary">Add Favorite</Button>
 
                 </Card>)}
             </div>
+            {
+                showToast && <Toast onClose={() => setShowToast(false)}>
+                    <Toast.Header>
+                        <strong className="me-auto">Favorite Recipe</strong>
+                    </Toast.Header>
+                    <Toast.Body>This recipe is now your favorite.</Toast.Body>
+                </Toast>
+            }
         </Container>
     );
 };

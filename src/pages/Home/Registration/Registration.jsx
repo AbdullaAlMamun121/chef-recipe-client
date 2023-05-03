@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Registration = () => {
     const { createUser} = useContext(AuthContext);
     const [error,setError] = useState('');
+ 
     const handleRegistration = event => {
-
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
