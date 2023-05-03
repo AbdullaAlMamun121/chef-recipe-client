@@ -11,24 +11,46 @@ const Header = () => {
     return (
         <div>
             <NavBar></NavBar>
-            <Card className="bg-dark text-white mt-2">
-                <Card.Img className='h-25' src={header2} alt="Card image" />
-                <Card.ImgOverlay className='d-flex'>
-                    <div className='w-50'>
-                        <Card.Title>Perfect Chef Recipe</Card.Title>
-                        <Card.Text>
-                            A recipe is a set of instructions that describes how to prepare or make something, especially a dish of prepared food. A sub-recipe or subrecipe is a recipe for an ingredient that will be called for in the instructions for the main recipe.
-                        </Card.Text>
-                        <Card.Text>Last updated 3 mins ago</Card.Text>
-                    </div>
-                    <div className='w-50 h-25 rounded bg-black text-center'>
-                        <Image style={{ height: '100%' }} src={feature1} rounded />
-                        <Image style={{ height: '100%' }} src={feature2} rounded />
-                        <Image style={{ height: '100%' }} src={feature1} rounded />
-                    </div>
-                </Card.ImgOverlay>
-    
-            </Card>
+            <Carousel>
+                <Carousel.Item>
+                    <img
+                        className="d-block h-100 w-100"
+                        src={header}
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block h-100 w-100"
+                        src={header2}
+                        alt="Second slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block h-100 w-100"
+                        src={header}
+                        alt="Third slide"
+                        
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>
+                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                        </p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
         </div>
     );
 };
