@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Registration = () => {
-    const { createUser} = useContext(AuthContext);
-    const [error,setError] = useState('');
- 
+    const { createUser } = useContext(AuthContext);
+    const [error, setError] = useState('');
+
     const handleRegistration = event => {
+        event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
@@ -15,24 +17,41 @@ const Registration = () => {
         const pUrl = form.pUrl.value;
         console.log(name, email, password, pUrl);
         setError('');
-        if(password.length<6){
+        if (password.length < 6) {
             setError('password must be at least 6 characters');
             return;
         }
-        else if(!/(?=.*[A-Z])/.test(password)){
-          setError('Add at least One Upper case');
-          return; 
+        else if (!/(?=.*[A-Z])/.test(password)) {
+            setError('Add at least One Upper case');
+            return;
         }
         createUser(email, password)
-        .then(result =>{
-          const loggedUser = result.user;
-          form.reset();
-          console.log(loggedUser);
+            .then(result => {
+                const loggedUser = result.user;
+                form.reset();
+                updateUserData(result.user, name, pUrl)
+                console.log(loggedUser,name, email, pUrl);
+                
+            })
+            .catch(error => {
+                setError(error.message);
+                console.log(error);
+            })
+
+
+    }
+
+    const updateUserData = (user, name, pUrl) => {
+        updateProfile(user, {
+            displayName: name,
+            photoURL: pUrl
         })
-        .catch(error =>{
-            setError(error.message);
-            console.log(error);
-        })
+            .then(() => {
+                console.log('user profile updated');
+            })
+            .catch(error => {
+                console.error(error.message)
+            })
     }
 
     return (
@@ -41,21 +60,21 @@ const Registration = () => {
             <Form onSubmit={handleRegistration}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="Enter Name" required />
+                    <Form.Control type="text" name="name" placeholder="Enter Name" required id="name"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="Enter email" required />
+                    <Form.Control id="email" type="email" name="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="Password" required />
+                    <Form.Control id="password" type="password" name="password" placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Photo Url</Form.Label>
-                    <Form.Control type="text" name="pUrl" placeholder="Photo Url" required />
+                    <Form.Control id="pUrl" type="text" name="pUrl" placeholder="Photo Url" required />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
@@ -65,9 +84,9 @@ const Registration = () => {
                 <Form.Text className="text-muted">
                     Already have an account to chef recipe? <Link to="/login">Login</Link>
                 </Form.Text>
-                <br/>
+                <br />
                 <Form.Text className="text-muted">
-                   {error}
+                    {error}
                 </Form.Text>
             </Form>
         </div>
