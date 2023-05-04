@@ -9,7 +9,7 @@ const ChefsCard = ({ chef }) => {
   console.log(id);
   return (
     <Container>
-      <Card>
+      <Card className='mb-4'>
         <Suspense fallback={<div>Loading...</div>}>
           <LazyCardImg variant="top" src={image} />
         </Suspense>
