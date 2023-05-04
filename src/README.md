@@ -1,5 +1,5 @@
 ### Welcome to my application Chef recipe you can find your desire food through my application.
-[See the live demo here!](https://stellar-kulfi-9c0b0b.netlify.app/)
+[See the live demo here!](https://chef-recipe-assignment.web.app/)
 
 * This project is a chef and recipe project that will help you find your desire dish.
 * In this project you will find chef specialist and delicious food menu items.

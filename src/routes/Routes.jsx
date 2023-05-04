@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/chef')
+        loader: () => fetch('https://chef-recipe-assignment-server-abdullaalmamun121.vercel.app/chef')
       },
       {
         path: '/login',
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: ':id',
         element: <PrivateRoute><ChefDetails></ChefDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/chef/${params.id}`)
+        loader: ({ params }) => fetch(`https://chef-recipe-assignment-server-abdullaalmamun121.vercel.app/chef/${params.id}`)
       }
     ]
   }
